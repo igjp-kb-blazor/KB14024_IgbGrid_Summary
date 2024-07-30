@@ -1,0 +1,48 @@
+﻿<div style="max-width: 800px; margin: auto; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+    <IgbGrid Data="_salesData"
+             Height="400px"
+             Width="100%"
+             PrimaryKey="@nameof(SalesData.Id)"
+             AutoGenerate="false"
+             ColumnInitScript="WebGridCustomSummary">
+        <IgbColumn Field="@nameof(SalesData.Area)" Header="地方" Width="20%" ></IgbColumn>
+        <IgbColumn Field="@nameof(SalesData.Region)" Header="支店" Width="20%" HasSummary="true"></IgbColumn>
+        <IgbColumn Field="@nameof(SalesData.Month)" Header="月" Width="20%"></IgbColumn>
+        <IgbColumn Field="@nameof(SalesData.Sales)" Header="月次売上"
+                   DataType="GridColumnDataType.Currency"
+                   HasSummary="true" Editable 
+                   PipeArgs=@(new IgbColumnPipeArgs(){CurrencyCode="JPY"})>
+        </IgbColumn>
+    </IgbGrid>
+</div>
+
+@code {
+    public class SalesData
+    {
+        public int Id { get; set; }
+        public string? Region { get; set; }
+        public string? Area { get; set; } // 大枠の地方
+        public string? Month { get; set; }
+        public int Sales { get; set; }
+    }
+
+    private List<SalesData> _salesData = new()
+    {
+        new() { Id = 1, Region = "東京", Area = "関東", Month = "1月", Sales = 850000 },
+        new() { Id = 2, Region = "東京", Area = "関東", Month = "2月", Sales = 750000 },
+        new() { Id = 3, Region = "神奈川", Area = "関東", Month = "1月", Sales = 820000 },
+        new() { Id = 4, Region = "神奈川", Area = "関東", Month = "2月", Sales = 780000 },
+        new() { Id = 5, Region = "埼玉", Area = "関東", Month = "1月", Sales = 860000 },
+        new() { Id = 6, Region = "埼玉", Area = "関東", Month = "2月", Sales = 820000 },
+        new() { Id = 7, Region = "千葉", Area = "関東", Month = "1月", Sales = 870000 },
+        new() { Id = 8, Region = "千葉", Area = "関東", Month = "2月", Sales = 830000 },
+        new() { Id = 9, Region = "大阪", Area = "近畿", Month = "1月", Sales = 900000 },
+        new() { Id = 10, Region = "大阪", Area = "近畿", Month = "2月", Sales = 800000 },
+        new() { Id = 11, Region = "京都", Area = "近畿", Month = "1月", Sales = 870000 },
+        new() { Id = 12, Region = "京都", Area = "近畿", Month = "2月", Sales = 820000 },
+        new() { Id = 13, Region = "兵庫", Area = "近畿", Month = "1月", Sales = 880000 },
+        new() { Id = 14, Region = "兵庫", Area = "近畿", Month = "2月", Sales = 830000 },
+        new() { Id = 15, Region = "奈良", Area = "近畿", Month = "1月", Sales = 860000 },
+        new() { Id = 16, Region = "奈良", Area = "近畿", Month = "2月", Sales = 810000 },
+    };
+}
